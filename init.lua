@@ -1,15 +1,19 @@
--- Ensure `lazy.nvim` is added to the runtime path
-vim.opt.rtp:prepend("~/.local/share/nvim/lazy/lazy.nvim")
 
--- Set up lazy.nvim
-require("lazy").setup("plugins")
+local lazypath = vim.fn.stdpath("data") .. "lazy/lazy.vim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- set up keymaps
-require('core.keymaps')
+local plugins = {}
+local opts = {}
 
--- Basic settings
-vim.o.number = true                -- Show line numbers
-vim.o.relativenumber = true        -- Relative line numbers
-vim.o.tabstop = 4                  -- Number of spaces for a tab
-vim.o.shiftwidth = 4               -- Number of spaces for autoindent
-vim.o.expandtab = false -- Use spaces instead of tabs
+require("lazy").setup(plugins, opts)
+

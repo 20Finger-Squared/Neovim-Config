@@ -1,4 +1,4 @@
-return  {
+return {
   {
     "williamboman/mason.nvim",
     config = function()
@@ -21,6 +21,17 @@ return  {
     end
   },
   {
-    "nvim-telescope/telescope-ui-select.nvim"
+    "nvim-telescope/telescope-ui-select.nvim",
+    config = function()
+      require("telescope").setup({
+        extentions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {
+            }
+          }
+        }
+      })
+      require("telescope").load_extension("ui-select")
+    end
   },
 }

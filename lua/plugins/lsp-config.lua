@@ -3,22 +3,22 @@ return {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
-    end
+    end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" }
+        ensure_installed = { "lua_ls" },
       })
-    end
+    end,
   },
   {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
       lspconfig.lua_ls.setup({})
-    end
+    end,
   },
   {
     "nvim-telescope/telescope-ui-select.nvim",
@@ -26,12 +26,11 @@ return {
       require("telescope").setup({
         extentions = {
           ["ui-select"] = {
-            require("telescope.themes").get_dropdown {
-            }
-          }
-        }
+            require("telescope.themes").get_dropdown({}),
+          },
+        },
       })
       require("telescope").load_extension("ui-select")
-    end
+    end,
   },
 }

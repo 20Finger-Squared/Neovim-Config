@@ -15,7 +15,7 @@ return {
         ignore_focus = {},
         always_divide_middle = true,
         always_show_tabline = true,
-        globalstatus = false,
+        globalstatus = true,
         refresh = {
           statusline = 100,
           tabline = 100,
@@ -30,24 +30,27 @@ return {
           {'diagnostics', separator = ''},
           {"filesize"},
         },
-        lualine_c = { 
+        lualine_c = {
           {function()
             return "%="
           end,
           separator = ''
           },
-          {          
+          {
             'filename',
             separator = '',
             path = 1,
           },
         },
-      lualine_x = {
-        {'encoding', separator = '-'},
-        {'fileformat', separator = '-'},
-        {'filetype', separator = '-'},
-      },
-        lualine_y = {'progress'},
+        lualine_x = {
+          {'encoding', separator = '-'},
+          {'fileformat', separator = '-'},
+          {'filetype', separator = '-'},
+        },
+        lualine_y = {
+          {'location', separator = '-'},
+          {'progress'},
+        },
         lualine_z = {'datetime'},
       },
       tabline = {},

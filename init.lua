@@ -13,6 +13,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
 require("lazy").setup("plugins")
+require("plugin-options")
+
+-- opens all keymapping files
 for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath('config') .. "/lua/mappings", [[v:val =~ '\.lua$']])) do
     local module_name = file:gsub("%.lua$", "")
     require("mappings." .. module_name)

@@ -1,5 +1,5 @@
 local set = vim.keymap.set
-vim.keymap.set("n", "<leader>?", function()
+set("n", "<leader>?", function()
   require("which-key").show({ global = false })
 end, { desc = "Buffer Local Keymaps (which-key)" })
 

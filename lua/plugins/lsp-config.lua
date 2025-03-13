@@ -10,6 +10,7 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = { "lua_ls" },
+				automatica_installation = true,
 			})
 		end,
 	},
@@ -18,6 +19,14 @@ return {
 		config = function()
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({})
+			lspconfig.pyright.setup({
+				settings = {
+					python = {
+						venvPath = vim.fn.expand("~/.virtualenvs"), -- Change to your venv path
+						pythonPath = vim.fn.exepath("python3"), -- Auto-detects correct Python
+					},
+				},
+			})
 		end,
 	},
 	{

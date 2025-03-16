@@ -8,15 +8,6 @@ return {
         separator_style = "thick",
         buffer_padding = 0,
         show_buffer_numbers = true,
-				offsets = {
-					{ -- Buffer so that tabs don't appear above neotree
-						filetype = "neo-tree",
-						text = "Neotree",
-						highlight = "Directory",
-						separator = true,
-						text_align = "center",
-					},
-				},
 			},
 		})
 	end,

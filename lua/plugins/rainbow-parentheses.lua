@@ -1,12 +1,21 @@
 return {
-  "p00f/nvim-ts-rainbow",
-  config = function()
-    require('nvim-treesitter.configs').setup({
-      rainbow = {
-        enable = true,
-        extended_mode = true,
-        max_file_lines = 1000,
-      },
-    })
-  end
+	"HiPhish/rainbow-delimiters.nvim",
+	config = function()
+		local rainbow_delimiters = require("rainbow-delimiters")
+
+		vim.g.rainbow_delimiters = {
+			strategy = {
+				[""] = rainbow_delimiters.strategy["global"],
+				vim = rainbow_delimiters.strategy["local"],
+			},
+			query = {
+				[""] = "rainbow-delimiters",
+				lua = "rainbow-blocks",
+			},
+			priority = {
+				[""] = 110,
+				lua = 210,
+			},
+		}
+	end,
 }

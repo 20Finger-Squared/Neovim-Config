@@ -17,9 +17,9 @@ local function is_focused_window_oil_float()
   return win_config.relative ~= ""
 end
 
-set("n", "<leader>\\", function()
+set("n", "<leader>cd", function()
   if is_focused_window_oil_float() then
-    actions.cd.callback("tcd")
+    actions.cd.callback()
   end
 end, { desc = "Change to directory in oil" })
 

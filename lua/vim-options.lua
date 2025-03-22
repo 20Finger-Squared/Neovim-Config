@@ -1,4 +1,5 @@
 -- loaded before plugins
+vim.g.nofsync = true
 vim.opt.relativenumber = true
 vim.opt.termguicolors  = true
 vim.opt.expandtab      = true

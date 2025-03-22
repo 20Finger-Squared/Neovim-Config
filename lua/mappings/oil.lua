@@ -18,9 +18,7 @@ local function is_focused_window_oil_float()
 end
 
 set("n", "<leader>cd", function()
-  if is_focused_window_oil_float() then
     actions.cd.callback()
-  end
 end, { desc = "Change to directory in oil" })
 
 set("n", "<leader>v", function()

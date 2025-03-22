@@ -2,10 +2,19 @@ return {
 	"stevearc/oil.nvim",
 	---@module 'oil'
 	---@type oil.SetupOpts
-	opts = {},
-	dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+	dependencies = { "nvim-tree/nvim-web-devicons" }, 
 	lazy = false,
 	config = function()
-		require("oil").setup({ view_options = { show_hidden = true } })
+		require("oil").setup({
+      default_file_explorer         = true,
+      skip_confirm_for_simple_edits = true,
+      use_defualt_keymaps           = false,
+
+		  view_options = { show_hidden = true },
+      columns = {
+        "icon",
+        "size",
+      },
+		})
 	end,
 }

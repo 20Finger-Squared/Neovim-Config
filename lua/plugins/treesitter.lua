@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
+		build = ":tsupdate",
 		config = function()
 			local config = require("nvim-treesitter.configs")
 			config.setup({
@@ -11,14 +11,7 @@ return {
 				textobjects = {
 					select = {
 						enable = true,
-						lookahead = true,
-						keymaps = {
-							-- You can use the capture groups defined in textobjects.scm
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ac"] = "@class.outer",
-							["ic"] = "@class.inner",
-						},
+					lookahead = true,
 					},
 				},
 			})

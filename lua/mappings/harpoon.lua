@@ -3,8 +3,8 @@ local set     = vim.keymap.set
 
 harpoon:setup()
 
-set("n", "<leader>a", function() harpoon:list():add() end, {desc = "Adds file to harpoon"})
-set("n", "<C-e>",     function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, {desc = "Open harpoon select menu"})
+set("n", "<leader>a", function() harpoon:list():add() end,                         {desc = "Adds file to harpoon"})
+set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, {desc = "Open harpoon select menu"})
 
 set("n", "<leader>1", function() harpoon:list():select(1) end, {desc="Opens file no.1 in the harpoon buffer"})
 set("n", "<leader>2", function() harpoon:list():select(2) end, {desc="Opens file no.2 in the harpoon buffer"})

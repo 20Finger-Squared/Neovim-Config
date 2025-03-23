@@ -1,10 +1,3 @@
 local set = vim.keymap.set
-set("n", ";",          ":",            { desc = "Makes it more easy to enter cmdline"      })
-set("n", "<C-h>",      "<C-w>h",       { desc = "Move to left window"                      })
-set("n", "<C-j>",      "<C-w>j",       { desc = "Move to lower window"                     })
-set("n", "<C-k>",      "<C-w>k",       { desc = "Move to upper window"                     })
-set("n", "<C-l>",      "<C-w>l",       { desc = "Move to right window"                     })
-set("n", "<leader>qa", ":wqa<CR>",     { desc = "Quickly save and quit"                    })
-set("n", "<leader>q!", ":qa!<CR>",     { desc = "Close nvim without saving"                })
-set("n", "<leader>w",  ":wa<CR>",      { desc = "Quickly save all files"                   })
-set("n", "<C-w>",      ":bdelete<CR>", { desc = "Close current buffer"                     })
+set("n", ";",          ":",                        { desc = "Makes it more easy to enter cmdline"      })
+set("n", "<leader>wb", ":bdelete<CR>",             { desc = "Close current buffer"                     })

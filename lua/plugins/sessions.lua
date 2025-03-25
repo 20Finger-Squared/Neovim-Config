@@ -15,7 +15,10 @@ return {
 		auto_restore_last_session = true, -- On startup, loads the last saved session if session for cwd does not exist
 		use_git_branch = false, -- Include git branch name in session name
 		lazy_support = true, -- Automatically detect if Lazy.nvim is being used and wait until Lazy is done to make sure session is restored correctly. Does nothing if Lazy isn't being used. Can be disabled if a problem is suspected or for debugging
-		log_level = "error", -- Sets the log level of the plugin (debug, info, warn, error).
+
+		log_level = "error",
+		bypass_session_save_file_types = { "nofile", "terminal", "prompt" },
+		pre_save_cmds = { "set nofoldenable" },
 
 		session_lens = {
 			load_on_setup = true, -- Initialize on startup (requires Telescope)

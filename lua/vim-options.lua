@@ -18,7 +18,7 @@ vim.g.mapleader = " "
 -- folding settings
 vim.opt.foldenable = true
 vim.opt.foldmethod = "indent"
-vim.opt.foldlevel = 3
+vim.opt.foldlevel = 99
 vim.opt.foldcolumn = "5"
 
 vim.api.nvim_create_autocmd("FileType", { -- for some reason neovim likes tab to be 4

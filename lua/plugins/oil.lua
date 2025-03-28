@@ -22,6 +22,7 @@ return {
         ["gx"] = "actions.open_external",
         ["g?"] = { "actions.show_help", mode = "n" },
         ["<leader>v"] = { "actions.select", opts = { vertical = true } },
+        ["<leader>h"] = { "actions.select", opts = { horizontal = true } },
         ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
         ["<C-t>"] = { "actions.select", opts = { tab = true } },
         ["<C-c>"] = { "actions.close", mode = "n" },

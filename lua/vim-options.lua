@@ -19,7 +19,7 @@ vim.g.mapleader = " "
 vim.opt.foldenable = true
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 99
-vim.opt.foldcolumn = "5"
+vim.opt.foldcolumn = "3"
 
 vim.api.nvim_create_autocmd("FileType", { -- for some reason neovim likes tab to be 4
   pattern = "python",

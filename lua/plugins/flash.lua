@@ -6,8 +6,9 @@ return {
   opts = {
     jump      = { autojump = true },
     highlight = {},
-    label     = { rainbow = { enabled = true, shade = 5 } },
+    label     = { rainbow = { enabled = true, shade = 4 } },
     search    = {},
+
     ---@type table<string, Flash.Config>
     modes     = {
       -- options used when flash is activated through

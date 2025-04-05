@@ -10,23 +10,44 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = { "lua_ls" },
-				automatica_installation = true,
+				automatic_installation = true,
 			})
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
-		config = function()
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({})
-			lspconfig.pyright.setup({
-				settings = {
-					python = {
-						venvPath = vim.fn.expand("~/.virtualenvs"), -- Change to your venv path
-						pythonPath = vim.fn.exepath("python3"), -- Auto-detects correct Python
+		dependencies = { "saghen/blink.cmp" },
+		-- example using `opts` for defining servers
+		opts = {
+			servers = {
+				lua_ls = {},
+				html = {}, -- Fixed
+				cssls = {
+					settings = {
+						css = { validate = true },
+						scss = { validate = true },
+						less = { validate = true },
 					},
 				},
-			})
+				quick_lint_js = {},
+				ts_ls = {}, -- Fixed
+				pyright = {
+					settings = {
+						python = {
+							venvPath = vim.fn.expand("~/.virtualenvs"), -- Change to your venv path
+							pythonPath = vim.fn.exepath("python3"), -- Auto-detects correct Python
+						},
+					},
+				},
+			},
+		},
+
+		config = function(_, opts)
+			local lspconfig = require("lspconfig")
+			for server, config in pairs(opts.servers) do
+				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+				lspconfig[server].setup(config)
+			end
 		end,
 	},
 	{
@@ -42,5 +63,5 @@ return {
 			require("telescope").load_extension("ui-select")
 		end,
 	},
-  { "mfussenegger/nvim-lint", }
+	{ "mfussenegger/nvim-lint" },
 }

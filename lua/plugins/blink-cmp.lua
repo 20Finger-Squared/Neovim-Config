@@ -1,28 +1,5 @@
 return {
   {
-    'neovim/nvim-lspconfig',
-    dependencies = { 'saghen/blink.cmp' },
-
-    -- example using `opts` for defining servers
-    opts = {
-      servers = {
-        lua_ls = {},
-        html = {}, -- Fixed
-        cssls = {},
-        quick_lint_js = {},
-        css_variables = {},
-        ts_ls = {}, -- Fixed
-      }
-    },
-    config = function(_, opts)
-      local lspconfig = require('lspconfig')
-      for server, config in pairs(opts.servers) do
-        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-        lspconfig[server].setup(config)
-      end
-    end
-  },
-  {
     'saghen/blink.cmp',
     dependencies = {
       {
@@ -37,7 +14,6 @@ return {
         end,
       },
       'neovim/nvim-lspconfig',
-      "jdrupal-dev/css-vars.nvim",
       'rafamadriz/friendly-snippets',
       "moyiz/blink-emoji.nvim",
     },
@@ -71,12 +47,11 @@ return {
       -- (default) only show the documentation popup when manually triggered
       completion = {
         documentation = {
-          auto_show = false,
-          auto_show_delay_ms = 500,
+          auto_show = true,
+          auto_show_delay_ms = 0,
         },
 
 
-        accept = { auto_brackets = { enabled = true } },
         ghost_text = { enabled = true },
         menu = {
           draw = {
@@ -92,11 +67,6 @@ return {
             -- components to render, grouped by column
             columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 } },
 
-            -- definitions for possible components to render. each defines:
-            --   ellipsis: whether to add an ellipsis when truncating the text
-            --   width: control the min, max and fill behavior of the component
-            --   text function: will be called for each item
-            --   highlight function: will be called only when the line appears on screen
             components = {
               kind_icon = {
                 ellipsis = false,
@@ -189,16 +159,9 @@ return {
           'path',
           'snippets',
           'buffer',
-          'css_vars',
           "emoji",
         },
         providers = {
-          css_vars = {
-            name = "css-vars",
-            module = "css-vars.blink",
-            opts = { search_extensions = { ".js", ".ts", ".jsx", ".tsx" } }
-          },
-
           emoji = {
             module = "blink-emoji",
             name = "emoji",
@@ -214,6 +177,7 @@ return {
           }
 
         },
+
       },
 
       -- experimental signature help support
@@ -251,4 +215,5 @@ return {
       fuzzy = { implementation = "prefer_rust_with_warning" }
     },
     opts_extend = { "sources.default" }
-  } }
+  }
+}

@@ -15,7 +15,6 @@ return {
       },
       'neovim/nvim-lspconfig',
       'rafamadriz/friendly-snippets',
-      "moyiz/blink-emoji.nvim",
     },
 
 
@@ -159,16 +158,8 @@ return {
           'path',
           'snippets',
           'buffer',
-          "emoji",
         },
         providers = {
-          emoji = {
-            module = "blink-emoji",
-            name = "emoji",
-            score_offset = 15,        -- tune by preference
-            opts = { insert = true }, -- insert emoji (default) or complete its name
-          },
-
           lsp = {
             name = 'lsp',
             module = "blink.cmp.sources.lsp",

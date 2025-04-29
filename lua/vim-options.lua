@@ -1,23 +1,28 @@
 -- loaded before plugins
+
 vim.g.nofsync = true -- mainly for windows I have no idea what it does
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 vim.opt.expandtab = true
 vim.opt.spell = true
+vim.opt.spelllang = "en_gb"
+
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.spelllang = "en_gb"
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "python",
+vim.diagnostic.config({
+    virtual_text = true,
+})
+
+vim.api.nvim_create_autocmd("FileType", { pattern = "python",
     callback = function(args)
         local bufnr = args.buf
 
-        -- Set colorcolumn visually
+        -- Set colour column visually
         vim.api.nvim_buf_set_option(bufnr, "colorcolumn", "80")
 
         -- Highlight past column 80 and store match ID in buffer variable
@@ -39,7 +44,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
--- if you don't think this should be default you're mad
+-- If you don't think this should be default you're mad
 vim.g.mapleader = " "
 
 -- folding settings
@@ -48,5 +53,4 @@ vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 99
 vim.opt.foldcolumn = "3"
 
--- Opens the last closed buffer
 vim.api.nvim_create_user_command('Arise', function() print("TODO") end, { nargs = 0 })

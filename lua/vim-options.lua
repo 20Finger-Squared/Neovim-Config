@@ -14,38 +14,21 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.diagnostic.config({
-    virtual_text = true,
-})
-
-vim.api.nvim_create_autocmd("FileType", { pattern = "python",
-    callback = function(args)
-        local bufnr = args.buf
-
-        -- Set colour column visually
-        vim.api.nvim_buf_set_option(bufnr, "colorcolumn", "80")
-
-        -- Highlight past column 80 and store match ID in buffer variable
-        local match_id = vim.fn.matchadd("ErrorMsg", [[\%>80v.\+]])
-        vim.b[bufnr].python_col_limit_match = match_id
-
-        -- Remove the match when leaving the buffer/window
-        vim.api.nvim_create_autocmd("BufWinLeave", {
-            buffer = bufnr,
-            once = true,  -- ensure it only runs once
-            callback = function()
-                local id = vim.b[bufnr].python_col_limit_match
-                if id then
-                    vim.fn.matchdelete(id)
-                    vim.b[bufnr].python_col_limit_match = nil
-                end
-            end
-        })
-    end
-})
+vim.lsp.inlay_hint.enable(true, nil, 0)
+vim.diagnostic.config({ virtual_text = true })
 
 -- If you don't think this should be default you're mad
 vim.g.mapleader = " "
+vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_view_general_viewer = 'zathura'
+vim.g.vimtex_view_general_options = '--synctex-forward @line:@col:@tex @pdf'
+-- vim.g.vimtex_view_general_options_latexmk = '--synctex-forward @line:@col:@tex @pdf'
+vim.g.tex_flavor='latex'
+vim.g.vimtex_quickfix_mode=0
+vim.g.tex_conceal='abdmg'
+
+
+vim.cmd("set conceallevel=1")
 
 -- folding settings
 vim.opt.foldenable = true

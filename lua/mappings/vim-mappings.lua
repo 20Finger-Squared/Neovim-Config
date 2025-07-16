@@ -1,15 +1,25 @@
 local set = vim.keymap.set
-set("n", ";", ":", { desc = "Makes it more easy to enter cmdline" })
+
+set("n", ";", ":", { desc = "Easier access to command-line mode" })
 set("n", "<leader>wb", ":bdelete<CR>", { desc = "Close current buffer" })
 
-vim.keymap.set("n", "<leader>rp", function()
-        if vim.bo.filetype == "python" then
-            vim.cmd("belowright split | terminal python3 " .. vim.fn.expand("%"))
-        end
-        if vim.bo.filetype == "c" then
-            vim.cmd("belowright split | terminal gcc " .. vim.fn.expand("%") .. " -o temp && ./temp")
-        end
-        if vim.bo.filetype == "cpp" then
-            vim.cmd("belowright split | terminal g++ " .. vim.fn.expand("%") .. " -o temp && ./temp")
-        end
-end, { desc = "Runs the current file works with c, cpp, python", silent = true })
+set("n", "<leader>rp", function()
+    vim.cmd("write") -- Save file before running
+    local filename = vim.fn.expand("%")
+    local ft = vim.bo.filetype
+
+    if ft == "python" then
+        vim.cmd("belowright split | terminal python3 " .. filename)
+    elseif ft == "c" then
+        vim.cmd("belowright split | terminal gcc " .. filename .. " -o temp && ./temp")
+    elseif ft == "cpp" then
+        vim.cmd("belowright split | terminal g++ " .. filename .. " -o temp && ./temp")
+    elseif ft == "rust" then
+        vim.cmd("belowright split | terminal cargo run")
+    else
+        vim.notify("Unsupported filetype: " .. ft, vim.log.levels.WARN)
+    end
+end, {
+    desc = "Run current file (Python, C, C++, Rust)",
+    silent = true,
+})

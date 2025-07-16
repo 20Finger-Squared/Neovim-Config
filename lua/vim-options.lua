@@ -6,7 +6,7 @@ vim.opt.termguicolors = true
 vim.opt.expandtab = true
 vim.opt.spell = true
 vim.opt.spelllang = "en_gb"
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4

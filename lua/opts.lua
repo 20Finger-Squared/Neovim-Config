@@ -30,4 +30,5 @@ vim.opt.virtualedit = "block"    -- Allow cursor anywhere in visual block
 vim.opt.undofile = true
 
 vim.opt.pumheight = 10     -- Max items in popup menu
-vim.opt.showmode = false   -- Don't show "-- INSERT --", if you use a statusline
+
+vim.opt.foldmethod="indent"

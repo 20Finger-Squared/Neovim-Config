@@ -12,7 +12,6 @@ return {
         local indentscope = require("mini.indentscope")
         local trailspace  = require("mini.trailspace")
         local cursorword  = require("mini.cursorword")
-        local clue        = require("mini.clue")
         local ai          = require("mini.ai")
 
         cursorword.setup()
@@ -24,50 +23,6 @@ return {
         surround.setup()
         statusline.setup()
         trailspace.setup()
-
-        clue.setup({
-            -- Array of extra clues to show
-            clues = {},
-            triggers = {
-                -- Leader triggers
-                { mode = 'n', keys = '<Leader>' },
-                { mode = 'x', keys = '<Leader>' },
-
-                -- `g` key
-                { mode = 'n', keys = 'g' },
-                { mode = 'x', keys = 'g' },
-
-                -- Marks
-                { mode = 'n', keys = "'" },
-                { mode = 'n', keys = '`' },
-                { mode = 'x', keys = "'" },
-                { mode = 'x', keys = '`' },
-
-                -- Registers
-                { mode = 'n', keys = '"' },
-                { mode = 'x', keys = '"' },
-                { mode = 'i', keys = '<C-r>' },
-                { mode = 'c', keys = '<C-r>' },
-
-                -- Window commands
-                { mode = 'n', keys = '<C-w>' },
-
-                -- `z` key
-                { mode = 'n', keys = 'z' },
-                { mode = 'x', keys = 'z' },
-            },
-            window = {
-                -- Floating window config
-                config = {},
-
-                -- No delay before showing clue window
-                delay = 0,
-
-                -- Keys to scroll inside the clue window
-                scroll_down = '<C-d>',
-                scroll_up = '<C-u>',
-            },
-        })
 
         basics.setup({
             options = { extra_ui = true },

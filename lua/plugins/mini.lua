@@ -17,7 +17,6 @@ return {
         cursorword.setup()
         move.setup()
         ai.setup()
-        basics.setup()
         align.setup()
         comment.setup()
         surround.setup()
@@ -35,10 +34,10 @@ return {
                 relnum_in_visual_mode = true,
             },
         })
-        indentscope.setup( {
-            symbol = "│",
-            draw = { delay = 50 }
-        })
 
+        indentscope.setup( {
+            symbol = "·",
+            draw = { delay = 150 }
+        })
     end
 }

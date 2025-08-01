@@ -1,4 +1,5 @@
 require("options")
+require("pack")
 require("plugins")
-require("mini-setup")
 require("keymaps")
+require("colors")

@@ -1,43 +1,114 @@
 return {
-    'echasnovski/mini.nvim',
-    version = false,
-    config = function()
+    {
+        'echasnovski/mini.nvim',
+        lazy = false,
+        version = false,
+        config = function()
+            local MiniStatusline = require('mini.statusline')
+            require("mini.surround").setup()
+            require("mini.files").setup()
+            require("mini.align").setup()
+            require("mini.ai").setup()
+            require("mini.comment").setup()
 
-        local basics      = require("mini.basics")
-        local align       = require("mini.align")
-        local comment     = require("mini.comment")
-        local move        = require("mini.move")
-        local surround    = require("mini.surround")
-        local statusline  = require("mini.statusline")
-        local indentscope = require("mini.indentscope")
-        local trailspace  = require("mini.trailspace")
-        local cursorword  = require("mini.cursorword")
-        local ai          = require("mini.ai")
+            local miniclue = require('mini.clue')
+            miniclue.setup({
+                triggers = {
+                    -- Leader triggers
+                    { mode = 'n', keys = '<Leader>' },
+                    { mode = 'x', keys = '<Leader>' },
 
-        cursorword.setup()
-        move.setup()
-        ai.setup()
-        align.setup()
-        comment.setup()
-        surround.setup()
-        statusline.setup()
-        trailspace.setup()
+                    -- `[` and `]` keys
+                    { mode = 'n', keys = '[' },
+                    { mode = 'n', keys = ']' },
 
-        basics.setup({
-            options = { extra_ui = true },
-            mappings = {
-                windows = true,
-                move_with_alt = true,
-            },
-            autocommands = {
-                basic = true,
-                relnum_in_visual_mode = true,
-            },
-        })
+                    -- Built-in completion
+                    { mode = 'i', keys = '<C-x>' },
 
-        indentscope.setup( {
-            symbol = "·",
-            draw = { delay = 150 }
-        })
-    end
+                    -- `g` key
+                    { mode = 'n', keys = 'g' },
+                    { mode = 'x', keys = 'g' },
+
+                    -- Marks
+                    { mode = 'n', keys = "'" },
+                    { mode = 'n', keys = '`' },
+                    { mode = 'x', keys = "'" },
+                    { mode = 'x', keys = '`' },
+
+                    -- Registers
+                    { mode = 'n', keys = '"' },
+                    { mode = 'x', keys = '"' },
+                    { mode = 'i', keys = '<C-r>' },
+                    { mode = 'c', keys = '<C-r>' },
+
+                    -- Window commands
+                    { mode = 'n', keys = '<C-w>' },
+
+                    -- `z` key
+                    { mode = 'n', keys = 'z' },
+                    { mode = 'x', keys = 'z' },
+                },
+
+                clues = {
+                    -- Enhance this by adding descriptions for <Leader> mapping groups
+                    miniclue.gen_clues.square_brackets(),
+                    miniclue.gen_clues.builtin_completion(),
+                    miniclue.gen_clues.g(),
+                    miniclue.gen_clues.marks(),
+                    miniclue.gen_clues.registers(),
+                    miniclue.gen_clues.windows(),
+                    miniclue.gen_clues.z(),
+                },
+                -- Clue window settings
+                window = {
+                    -- Floating window config
+                    config = {anchor = "SE", row="auto", col="auto"},
+
+                    -- Delay before showing clue window
+                    delay = 0,
+                },
+            })
+
+            -- MiniStatusline setup
+            MiniStatusline.setup({
+                content = {
+                    active = function()
+                        local mode, mode_hl        = MiniStatusline.section_mode({ trunc_width = 120 })
+                        local git                  = MiniStatusline.section_git({ trunc_width = 40 })
+                        local diff                 = MiniStatusline.section_diff({ trunc_width = 75 })
+                        local diagnostics          = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+                        local lsp                  = MiniStatusline.section_lsp({ trunc_width = 75 })
+                        local filename             = MiniStatusline.section_filename({ trunc_width = 140 })
+                        local fileinfo             = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+                        local location             = MiniStatusline.section_location({ trunc_width = 75 })
+                        local search               = MiniStatusline.section_searchcount({ trunc_width = 75 })
+
+
+                        return MiniStatusline.combine_groups({
+                            -- Left side: Git / Diff / Diagnostics / LSP
+                            { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
+                            '%<', -- truncate point
+                            { hl = 'MiniStatuslineFilename', strings = { filename } },
+                            '%=', -- end left alignment
+                            { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+                            { hl = mode_hl, strings = { search, location } },
+                        })
+                    end,
+
+                    inactive = function()
+                        local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+                        local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+
+                        return MiniStatusline.combine_groups({
+                            -- Left side: Just filename for inactive windows
+                            { hl = 'MiniStatuslineInactive', strings = { filename } },
+                            '%=', -- end left alignment
+                            -- Right side: Just file info
+                            { hl = 'MiniStatuslineInactive', strings = { fileinfo } },
+                        })
+                    end
+                }
+            })
+        end
+    }
 }

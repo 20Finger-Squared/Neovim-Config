@@ -28,6 +28,43 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+-- Disable LSP for specific file types where it's not useful
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "help",            -- Help pages
+        "man",             -- Man pages
+        "terminal",        -- Terminal buffers
+        "alpha",           -- Alpha dashboard
+        "dashboard",       -- Dashboard plugins
+        "lspinfo",         -- LSP info window
+        "mason",           -- Mason plugin
+        "null-ls-info",    -- null-ls info
+        "checkhealth",     -- :checkhealth output
+        "git",             -- Git commit messages (if you prefer no LSP)
+        "gitcommit",       -- Git commit files
+        "gitrebase",       -- Git rebase files
+        "packer",          -- Packer plugin manager
+        "lazy",            -- Lazy plugin manager
+        "qf",              -- Quickfix window
+        "prompt",          -- Command prompt
+        "scratch",         -- Scratch buffers
+    },
+    callback = function(args)
+        -- Stop all LSP clients attached to this buffer
+        local clients = vim.lsp.get_clients({ bufnr = args.buf })
+        for _, client in ipairs(clients) do
+            vim.lsp.buf_detach_client(args.buf, client.id)
+        end
+
+        -- Disable diagnostics for this buffer
+        vim.diagnostic.config({ virtual_text = false, signs = false, underline = false }, args.buf)
+
+        -- Prevent LSP from attaching to this buffer in the future
+        vim.api.nvim_buf_set_var(args.buf, "lsp_disabled", true)
+    end,
+    desc = "Disable LSP for specific file types"
+})
+
 -- Format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = formatting,

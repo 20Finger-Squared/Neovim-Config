@@ -19,11 +19,11 @@ return {
                 preset = "none",
                 ["<Tab>"] = { "select_and_accept", "fallback" },
                 ["<S-Tab>"] = { "select_prev", "fallback" },
-                ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-                ["<Up>"] = { "select_prev", "fallback" },
-                ["<Down>"] = { "select_next", "fallback" },
-                ["<Left>"] = { "scroll_documentation_up", "fallback" },
-                ["<Right>"] = { "scroll_documentation_down", "fallback" },
+
+                ["<C-k>"] = { "show", "select_prev", "fallback" },
+                ["<C-j>"] = { "show", "select_next", "fallback" },
+                ["<C-h>"] = { "show_documentation", "scroll_documentation_up", "fallback" },
+                ["<C-l>"] = { "show_documentation", "scroll_documentation_down", "fallback" }
             },
             cmdline = { enabled = true },
             appearance = { nerd_font_variant = 'mono' },

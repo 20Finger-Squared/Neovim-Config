@@ -55,6 +55,12 @@ opt.foldlevelstart = 99 -- Always start with all folds open
 opt.foldenable = true   -- Enable folding
 opt.foldcolumn = "auto"
 
+vim.filetype.add({
+    extension = {
+        yuck = "yuck"
+    }
+})
+
 local state = {
     floating = {
         buf = -1,
@@ -108,4 +114,3 @@ local toggle_terminal = function()
 end
 
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
-

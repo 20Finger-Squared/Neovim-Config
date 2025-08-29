@@ -2,7 +2,62 @@ return {
     'https://github.com/neovim/nvim-lspconfig',
     config = function()
         local lspconfig = require("lspconfig")
+
         lspconfig.clangd.setup({})
+
+        -- Standard LSP capabilities
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+        lspconfig.marksman.setup({
+            cmd = { "marksman", "server" },
+            filetypes = { "markdown" },
+            root_dir = lspconfig.util.root_pattern(".git", "."),
+            settings = {},
+        })
+
+        -- HTML LSP
+        lspconfig.html.setup({
+            capabilities = capabilities,
+            settings = {
+                html = {
+                    format = {
+                        templating = true,
+                        wrapLineLength = 120,
+                        wrapAttributes = 'auto',
+                    },
+                    hover = {
+                        documentation = true,
+                        references = true,
+                    },
+                },
+            },
+        })
+
+        -- CSS LSP
+        lspconfig.cssls.setup({
+            capabilities = capabilities,
+            settings = {
+                css = { validate = true },
+            },
+        })
+
+        -- Yuck LSP setup
+        lspconfig.yuck_ls.setup({
+            default_config = {
+                cmd = { "yuckls" },
+                filetypes = { "yuck" },
+            }
+        })
+
+        -- TypeScript / JavaScript LSP
+        lspconfig.ts_ls.setup({
+            name = "ts_ls", -- optional alias
+            capabilities = capabilities,
+            settings = {
+                javascript = { format = { semicolons = 'insert' } },
+                typescript = { format = { semicolons = 'insert' } },
+            },
+        })
 
         -- Changed from pyright to basedpyright
         lspconfig.basedpyright.setup({

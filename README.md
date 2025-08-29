@@ -34,7 +34,7 @@ The statup time for this config is 53.686ms
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
+git clone git@github.com:20Finger-Squared/Neovim-Config.git ~/.config/nvim
 ```
 
 ## Disclaimer

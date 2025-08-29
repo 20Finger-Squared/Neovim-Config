@@ -16,7 +16,7 @@ The statup time for this config is 53.686ms
 - **Plugins:**
   - `Harpoon2` for quick file navigation
   - `marksman` LSP for Markdown
-  - `nvim-cmp` for autocompletion
+  - `blink-cmp` for autocompletion
   - `Mini` plugins for hints and utilities
   - `LeetCode` plugin for coding practice
 

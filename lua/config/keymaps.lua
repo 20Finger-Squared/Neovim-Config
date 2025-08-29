@@ -1,11 +1,5 @@
 local map = vim.keymap.set
 
--- 󰁍󰁔󰁖󰁝 Move to windows
-map({ 'n', 'i' }, '<C-h>', '<C-w>h', { desc = "󰁍 Move to left window" })
-map({ 'n', 'i' }, '<C-j>', '<C-w>j', { desc = "󰁔 Move to bottom window" })
-map({ 'n', 'i' }, '<C-k>', '<C-w>k', { desc = "󰁝 Move to top window" })
-map({ 'n', 'i' }, '<C-l>', '<C-w>l', { desc = "󰁖 Move to right window" })
-
 -- 󰩨 Resize windows
 map({ 'n', 'i' }, '<M-C-H>', '<cmd>vertical resize -1<CR>', { silent = true, desc = "󰍟 Decrease width" })
 map({ 'n', 'i' }, '<M-C-L>', '<cmd>vertical resize +1<CR>', { silent = true, desc = "󰍠 Increase width" })

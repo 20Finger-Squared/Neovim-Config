@@ -28,10 +28,11 @@ map({ 'n', 'i', 'v' }, '<Left>', '<Nop>', { desc = " Arrow keys disabled" })
 map({ 'n', 'i', 'v' }, '<Right>', '<Nop>', { desc = " Arrow keys disabled" })
 
 -- 󰜺 Move lines and code blocks
-map("v", "<M-k>", ":m '<-2<CR>gv=gv", { desc = "󰜷 Move selection up" })
-map("v", "<M-j>", ":m '>+1<CR>gv=gv", { desc = "󰜮 Move selection down" })
-map("n", "<M-k>", ":m .-2<CR>==", { desc = "󰜷 Move line up" })
-map("n", "<M-j>", ":m .+1<CR>==", { desc = "󰜮 Move line down" })
+map("v", "<M-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "󰜷 Move selection up" })
+map("v", "<M-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "󰜮 Move selection down" })
+map("n", "<M-k>", ":m .-2<CR>==", { silent = true, desc = "󰜷 Move line up" })
+map("n", "<M-j>", ":m .+1<CR>==", { silent = true, desc = "󰜮 Move line down" })
+
 local harpoon = require("harpoon")
 
 vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = " Add file to Harpoon" })

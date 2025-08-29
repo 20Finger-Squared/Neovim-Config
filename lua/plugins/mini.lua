@@ -83,6 +83,12 @@ return {
                         local location      = MiniStatusline.section_location({ trunc_width = 75 })
                         local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
 
+                        vim.api.nvim_set_hl(
+                            0, "MiniStatusLineMacro", {
+                                link = "GruvboxOrange",
+                                bg = "#a89984",
+                                bold = true,
+                            })
 
                         return MiniStatusline.combine_groups({
                             -- Left side: Git / Diff / Diagnostics / LSP
@@ -90,6 +96,8 @@ return {
                             '%<', -- truncate point
                             { hl = 'MiniStatuslineFilename', strings = { filename } },
                             '%=', -- end left alignment
+                            { hl = 'MiniStatuslineFilename', strings = { require("noice").api.status.command.get() } },
+                            { hl = 'MiniStatusLineMacro',    strings = { require("noice").api.status.mode.get() } },
                             { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
                             { hl = mode_hl, strings = { search, location } },
                         })

@@ -6,7 +6,6 @@ return {
         config = function()
             local MiniStatusline = require('mini.statusline')
             require("mini.surround").setup()
-            require("mini.files").setup()
             require("mini.align").setup()
             require("mini.ai").setup()
             require("mini.comment").setup()

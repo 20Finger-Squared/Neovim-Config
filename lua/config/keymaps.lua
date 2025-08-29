@@ -13,10 +13,6 @@ map({ 'n', 'i' }, '<M-N-L>', '<cmd>resize -1<CR>', { silent = true, desc = "󰍡
 map({ 'n', 'i' }, '<M-C-K>', '<cmd>resize +1<CR>', { silent = true, desc = "󰍡 Increase height" })
 local builtin = require("telescope.builtin")
 
-
--- 󰉋 File operations
-map("n", "<leader>ow", MiniFiles.open, { desc = "󰉋 Open file explorer" })
-
 -- 󰍉 Telescope fuzzy finding
 map("n", "<leader>fb", builtin.buffers, { desc = "󰸕 Find buffers" })
 map("n", "<leader>fc", builtin.command_history, { desc = "󰆊 Command history" })

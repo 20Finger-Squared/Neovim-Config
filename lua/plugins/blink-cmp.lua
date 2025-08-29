@@ -29,36 +29,38 @@ return {
             appearance = { nerd_font_variant = 'mono' },
             sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
             snippets = { preset = 'luasnip' },
-            fuzzy = { sorts = {
-                "score",
-                "sort_text",
-                "label",
+            signature = { enabled = true },
+            fuzzy = {
+                sorts = {
+                    "score",
+                    "sort_text",
+                    "label",
+                },
+                implementation = "prefer_rust_with_warning",
             },
-            implementation = "prefer_rust_with_warning",
-        },
-        completion = {
-            ghost_text = { enabled = true },
-            documentation = {
-                auto_show = true,
-                auto_show_delay_ms = 0,
-            },
-            menu = {
-                auto_show = false,
-                draw = {
-                    treesitter = { "lsp" },
-                    columns = {
-                        {"label", "label_description", gap = 1 },
-                        {"kind_icon", "kind"},
+            completion = {
+                ghost_text = { enabled = true },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 0,
+                },
+                menu = {
+                    auto_show = false,
+                    draw = {
+                        treesitter = { "lsp" },
+                        columns = {
+                            { "label",     "label_description", gap = 1 },
+                            { "kind_icon", "kind" },
+                        },
+                    },
+                },
+                list = {
+                    selection = {
+                        preselect = true,
+                        auto_insert = true,
                     },
                 },
             },
-            list = {
-                selection = {
-                    preselect = true,
-                    auto_insert = true,
-                },
-            },
-        },
-    })
-end
+        })
+    end
 }

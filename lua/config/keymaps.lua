@@ -7,10 +7,10 @@ map({ 'n', 'i' }, '<C-k>', '<C-w>k', { desc = "󰁝 Move to top window" })
 map({ 'n', 'i' }, '<C-l>', '<C-w>l', { desc = "󰁖 Move to right window" })
 
 -- 󰩨 Resize windows
-map({'n', 'i'}, '<M-C-H>', '<cmd>vertical resize -1<CR>', { silent = true, desc = "󰍟 Decrease width" })
-map({'n', 'i'}, '<M-C-L>', '<cmd>vertical resize +1<CR>', { silent = true, desc = "󰍠 Increase width" })
-map({'n', 'i'}, '<M-N-L>', '<cmd>resize -1<CR>', { silent = true, desc = "󰍡 Decrease height" })
-map({'n', 'i'}, '<M-C-K>', '<cmd>resize +1<CR>', { silent = true, desc = "󰍡 Increase height" })
+map({ 'n', 'i' }, '<M-C-H>', '<cmd>vertical resize -1<CR>', { silent = true, desc = "󰍟 Decrease width" })
+map({ 'n', 'i' }, '<M-C-L>', '<cmd>vertical resize +1<CR>', { silent = true, desc = "󰍠 Increase width" })
+map({ 'n', 'i' }, '<M-N-L>', '<cmd>resize -1<CR>', { silent = true, desc = "󰍡 Decrease height" })
+map({ 'n', 'i' }, '<M-C-K>', '<cmd>resize +1<CR>', { silent = true, desc = "󰍡 Increase height" })
 local builtin = require("telescope.builtin")
 
 
@@ -41,5 +41,5 @@ map("n", "<M-k>", ":m .-2<CR>==", { desc = "󰜷 Move line up" })
 map("n", "<M-j>", ":m .+1<CR>==", { desc = "󰜮 Move line down" })
 
 -- Terminal
-map({"n", "t"}, "<leader>t", ":Floaterminal<CR>", { desc = " Toggle floating terminal" })
+map({ "n", "t" }, "<leader>t", ":Floaterminal<CR>", { desc = " Toggle floating terminal" })
 map("t", "<ESC><ESC>", "<C-\\><C-n>", { desc = " Exit terminal mode" })

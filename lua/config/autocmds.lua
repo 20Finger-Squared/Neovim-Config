@@ -14,12 +14,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         -- LSP document highlight support
         if client.server_capabilities.documentHighlightProvider then
-            vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
                 group = qol,
                 buffer = args.buf,
                 callback = vim.lsp.buf.document_highlight,
             })
-            vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
+            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
                 group = qol,
                 buffer = args.buf,
                 callback = vim.lsp.buf.clear_references,
@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- Fallback: highlight word under cursor (if no LSP highlight available)
-vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     group = qol,
     callback = function()
         -- Only run if LSP highlighting didn’t set up for this buffer

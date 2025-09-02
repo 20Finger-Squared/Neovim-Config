@@ -61,13 +61,12 @@ return {
                 -- Clue window settings
                 window = {
                     -- Floating window config
-                    config = {anchor = "SE", row="auto", col="auto"},
+                    config = { anchor = "SE", row = "auto", col = "auto" },
 
                     -- Delay before showing clue window
                     delay = 0,
                 },
             })
-
             -- MiniStatusline setup
             MiniStatusline.setup({
                 content = {
@@ -82,23 +81,36 @@ return {
                         local location      = MiniStatusline.section_location({ trunc_width = 75 })
                         local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
 
-                        vim.api.nvim_set_hl(
-                            0, "MiniStatusLineMacro", {
-                                link = "GruvboxOrange",
-                                bg = "#a89984",
-                                bold = true,
-                            })
+                        -- Custom highlight
+                        vim.api.nvim_set_hl(0, "MiniStatusLineMacro", {
+                            link = "GruvboxOrange",
+                            bg = "#a89984",
+                            bold = true,
+                        })
+
+                        -- VSCode-safe Noice integration
+                        local noice_command, noice_mode
+                        if not vim.g.vscode then
+                            local noice   = require("noice")
+                            noice_command = noice.api.status.command.get()
+                            noice_mode    = noice.api.status.mode.get()
+                        else
+                            noice_command = ""
+                            noice_mode    = ""
+                        end
 
                         return MiniStatusline.combine_groups({
                             -- Left side: Git / Diff / Diagnostics / LSP
-                            { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
+                            { hl = 'MiniStatuslineDevinfo',  strings = { git, diff, diagnostics, lsp } },
                             '%<', -- truncate point
+                            -- Center: filename
                             { hl = 'MiniStatuslineFilename', strings = { filename } },
                             '%=', -- end left alignment
-                            { hl = 'MiniStatuslineFilename', strings = { require("noice").api.status.command.get() } },
-                            { hl = 'MiniStatusLineMacro',    strings = { require("noice").api.status.mode.get() } },
+                            -- Right side: Noice (if available), file info, search/location
+                            { hl = 'MiniStatuslineFilename', strings = { noice_command } },
+                            { hl = 'MiniStatusLineMacro',    strings = { noice_mode } },
                             { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
-                            { hl = mode_hl, strings = { search, location } },
+                            { hl = mode_hl,                  strings = { search, location } },
                         })
                     end,
 
@@ -107,14 +119,14 @@ return {
                         local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
 
                         return MiniStatusline.combine_groups({
-                            -- Left side: Just filename for inactive windows
+                            -- Left side: filename
                             { hl = 'MiniStatuslineInactive', strings = { filename } },
                             '%=', -- end left alignment
-                            -- Right side: Just file info
+                            -- Right side: file info
                             { hl = 'MiniStatuslineInactive', strings = { fileinfo } },
                         })
-                    end
-                }
+                    end,
+                },
             })
         end
     }

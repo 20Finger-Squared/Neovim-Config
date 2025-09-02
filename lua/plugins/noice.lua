@@ -1,6 +1,10 @@
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
+    cond = function()
+        -- only load in standalone Neovim
+        return not vim.g.vscode
+    end,
     opts = {
         lsp = {
             override = {
@@ -18,5 +22,5 @@ return {
     dependencies = {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
-    }
+    },
 }
